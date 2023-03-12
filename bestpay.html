@@ -99,8 +99,8 @@
       return rows.map(function(row) {return row[key];});
     }
 
-    var allUSydPay = unpack(rows,'usyd'),
-        allUNSWPay = unpack(rows,'unsw'),
+    var allUNSWPay = unpack(rows,'unsw'),
+        allUSydPay = unpack(rows,'usyd'),
         allPayLevels = unpack(rows,'code'),
         listofPayLevels = [],
         currentPayLevel,
