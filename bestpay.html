@@ -189,6 +189,44 @@
         usyd_payments.push(fortnight_pay.toFixed(2));
       }
 
+      var unsw_payments = [];
+
+      for (var i = 0; i < dates.length; i++) {
+        pay = currentUNSWPay
+        if (dates[i] > '2017-01-01') {
+          pay = Math.round(pay*1.015)
+        }
+        if (dates[i] > '2017-07-01') {
+          pay = Math.round(pay*1.015)
+        }
+        if (dates[i] > '2018-01-01') {
+          pay = Math.round(pay*1.015)
+        }
+        if (dates[i] > '2018-09-01') {
+          pay = Math.round((pay+uplift)*1.02)
+        }
+        if (dates[i] > '2019-07-01') {
+          pay = Math.round(pay*1.02)
+        }
+        if (dates[i] > '2020-07-01') {
+          pay = Math.round(pay*1.01)
+        }
+        if (dates[i] > '2021-01-01') {
+          pay = Math.round(pay*1.01)
+        }
+        if (dates[i] > '2021-07-01') {
+          pay = Math.round(pay*1.01)
+        }
+        if (dates[i] > '2022-01-01') {
+          pay = Math.round(pay*1.01)
+        }
+        if (dates[i] > '2022-07-01') {
+          pay = Math.round(pay*1.01)
+        }
+        fortnight_pay = pay/365.25*14
+        unsw_payments.push(fortnight_pay.toFixed(2));
+      }      
+
 
       // var uplift = 0
       // if (currentPayLevel.slice(0,1) == 'H'){
@@ -279,16 +317,16 @@
       var trace1 = {
         x: dates,
         y: usyd_payments,
-        name: 'USyd Offer',
+        name: 'USyd',
         mode: 'bar'
       };
 
-      // var trace2 = {
-      //   x: dates,
-      //   y: inflation_payments,
-      //   name: 'Predicted CPI',
-      //   mode: 'bar'
-      // };
+      var trace2 = {
+        x: dates,
+        y: unsw_payments,
+        name: 'UNSW',
+        mode: 'bar'
+      };
 
       // var trace3 = {
       //   x: dates,
@@ -329,18 +367,18 @@
 
       // Calculate totals by FY and over period
       var usyd_yearly = [],
-          // utas_yearly = [],
+          unsw_yearly = [],
           // wsu_yearly = [],
           // acu_yearly = [],
           // inflation_yearly = [],
           usyd_total = 0,
-          // utas_total = 0,
+          unsw_total = 0,
           // wsu_total = 0,
           // acu_total = 0,
           // inflation_total = 0,
           finyear = [];
 
-      for (var fy = 17; fy < 23; fy++) {
+      for (var fy = 17; fy < 24; fy++) {
         finyear.push('FY'+fy)
 
         start_date = fy+1999+'-07-01'
@@ -362,9 +400,9 @@
         usyd_yearly.push(sum);
         usyd_total += sum;
 
-        // sum = utas_payments.slice(start_index,end_index).reduce((partialSum, a) => partialSum + parseFloat(a), 0);
-        // utas_yearly.push(sum);
-        // utas_total += sum;
+        sum = unsw_payments.slice(start_index,end_index).reduce((partialSum, a) => partialSum + parseFloat(a), 0);
+        unsw_yearly.push(sum);
+        unsw_total += sum;
 
         // sum = wsu_payments.slice(start_index,end_index).reduce((partialSum, a) => partialSum + parseFloat(a), 0);
         // wsu_yearly.push(sum);
@@ -390,16 +428,16 @@
       var traceA = {
         x: finyear,
         y: usyd_yearly,
-        name: 'USyd Offer',
+        name: 'USyd',
         type: 'bar'
       };
 
-      // var traceB = {
-      //   x: finyear,
-      //   y: inflation_yearly,
-      //   name: 'Predicted CPI',
-      //   type: 'bar'
-      // };
+      var traceB = {
+        x: finyear,
+        y: unsw_yearly,
+        name: 'UNSW',
+        type: 'bar'
+      };
 
       // var traceC = {
       //   x: finyear,
@@ -422,7 +460,7 @@
       //   type: 'bar'
       // };
 
-      var data2 = [traceA];
+      var data2 = [traceA, traceB];
 
       var layout2 = {
         xaxis:{
