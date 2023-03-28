@@ -81,7 +81,7 @@
   //Instantiate the chart and bind it to content html
   // var graphDiv = document.getElementById('content');
 
-  var date_df = 'data/dates.csv';
+  var date_df = 'data/dates_2021-2027.csv';
   var xDateSeriesName = 'date';
   var yDateSeriesName = 'idx';
 
@@ -194,6 +194,9 @@
           pay = Math.round(pay*1.036)
         }
         if (dates[i] > '2025-07-13') {
+          pay = Math.round(pay*1.03)
+        }
+        if (dates[i] > '2026-07-13') {
           pay = Math.round(pay*1.03)
         }
         fortnight_pay = pay/365.25*14
@@ -371,7 +374,7 @@
           inflation_total = 0,
           finyear = [];
 
-      for (var fy = 22; fy < 27; fy++) {
+      for (var fy = 22; fy < 28; fy++) {
         finyear.push('FY'+fy)
 
         start_date = fy+1999+'-07-01'
