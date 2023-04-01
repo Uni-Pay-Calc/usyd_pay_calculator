@@ -143,6 +143,7 @@
 
       var usyd_payments_feb = [];
       var usyd_payments_mar = [];
+      var usyd_payments_5p5 = [];
       
       Date.prototype.addDays = function(days) {
           var date = new Date(this.valueOf());
@@ -156,30 +157,40 @@
       for (var i = 0; i < dates.length; i++) {
         pay_feb = currentPay
         pay_mar = currentPay
+        pay_5p5 = currentPay
         if (dates[i] > '2022-07-13') {
           pay_feb = Math.round(pay_feb*1.021)
           pay_mar = Math.round(pay_mar*1.021)
+          pay_5p5 = Math.round(pay_5p5*1.021)
         }
         if (dates[i] > nextFortnight) {
           pay_feb = Math.round(pay_feb*1.046)
           pay_mar = Math.round(pay_mar*1.046)
         }
+        if (dates[i] > '2023-07-13') {
+          pay_5p5 = Math.round(pay_5p5*1.055)
+        }
         if (dates[i] > '2024-07-13') {
           pay_feb = Math.round(pay_feb*1.0325)
           pay_mar = Math.round(pay_mar*1.0375)
+          pay_5p5 = Math.round(pay_5p5*1.055)
         }
         if (dates[i] > '2025-07-13') {
           pay_feb = Math.round(pay_feb*1.0325)
           pay_mar = Math.round(pay_mar*1.0375)
+          pay_5p5 = Math.round(pay_5p5*1.055)
         }
         if (dates[i] > '2026-07-13') {
           pay_feb = Math.round(pay_feb*1.035)
           pay_mar = Math.round(pay_mar*1.040)
+          pay_5p5 = Math.round(pay_5p5*1.055)
         }
         fortnight_pay_feb = pay_feb/365.25*14
         fortnight_pay_mar = pay_mar/365.25*14
+        fortnight_pay_5p5 = pay_5p5/365.25*14
         usyd_payments_feb.push(fortnight_pay_feb.toFixed(2));
         usyd_payments_mar.push(fortnight_pay_mar.toFixed(2));
+        usyd_payments_5p5.push(fortnight_pay_5p5.toFixed(2));
       }
 
       var inflation_payments = []
@@ -314,6 +325,17 @@
 
       var trace3 = {
         x: dates,
+        y: usyd_payments_5p5,
+        name: '5.5% per annum',
+        mode: 'lines',
+        line: {
+          dash: 'solid',
+          color: '#2ca02c'
+        }
+      };
+
+      var trace4 = {
+        x: dates,
         y: inflation_payments,
         name: 'Predicted CPI',
         mode: 'lines',
@@ -344,7 +366,7 @@
       //   mode: 'bar'
       // };
 
-      var data = [trace1, trace2, trace3];
+      var data = [trace1, trace2, trace3, trace4];
 
       var layout = {
         xaxis:{
