@@ -326,6 +326,8 @@
         if (dates[i] > '2026-01-13') {
           pay = Math.round(pay*1.02)
         }
+        fortnight_pay = pay/365.25*14
+        uq_payments.push(fortnight_pay.toFixed(2));
       }
 
       var trace1 = {
@@ -350,16 +352,16 @@
         }
       };
 
-      var trace3 = {
-        x: dates,
-        y: usyd_payments_5p5,
-        name: '5.5% per annum',
-        mode: 'lines',
-        line: {
-          dash: 'solid',
-          color: '#2ca02c'
-        }
-      };
+      // var trace3 = {
+      //   x: dates,
+      //   y: usyd_payments_5p5,
+      //   name: '5.5% per annum',
+      //   mode: 'lines',
+      //   line: {
+      //     dash: 'solid',
+      //     color: '#2ca02c'
+      //   }
+      // };
 
       var trace4 = {
         x: dates,
@@ -390,7 +392,7 @@
         mode: 'lines',
         line: {
           dash: 'solid',
-          color: '#8c564b'
+          color: '#2ca02c'
         }
       };
 
@@ -408,7 +410,7 @@
 
       var trace8 = {
         x: dates,
-        y: acu_payments,
+        y: uq_payments,
         name: 'UQ Offer',
         mode: 'lines',
         line: {
@@ -440,12 +442,14 @@
           utas_yearly = [],
           wsu_yearly = [],
           acu_yearly = [],
+          uq_yearly = [],
           inflation_yearly = [],
           usyd_feb_total = 0,
           usyd_mar_total = 0,
           utas_total = 0,
           wsu_total = 0,
           acu_total = 0,
+          uq_total = 0,
           inflation_total = 0,
           finyear = [];
 
@@ -492,6 +496,10 @@
         sum = acu_payments.slice(start_index,end_index).reduce((partialSum, a) => partialSum + parseFloat(a), 0);
         acu_yearly.push(sum);
         acu_total += sum;
+        
+        sum = uq_payments.slice(start_index,end_index).reduce((partialSum, a) => partialSum + parseFloat(a), 0);
+        uq_yearly.push(sum);
+        uq_total += sum;
 
         sum = inflation_payments.slice(start_index,end_index).reduce((partialSum, a) => partialSum + parseFloat(a), 0);
         inflation_yearly.push(sum);
