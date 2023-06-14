@@ -302,6 +302,32 @@
         acu_payments.push(fortnight_pay.toFixed(2));
       }
 
+      var uq_payments = []
+      for (var i = 0; i < dates.length; i++) {
+        pay = currentPay
+        if (dates[i] > '2022-12-13') {
+          pay = Math.round(pay*1.03)
+        }
+        if (dates[i] > nextFortnight) {
+          pay = Math.round(pay+1500)
+        }
+        if (dates[i] > '2024-01-13') {
+          pay = Math.round(pay*1.02)
+        }
+        if (dates[i] > '2024-07-13') {
+          pay = Math.round(pay*1.02)
+        }
+        if (dates[i] > '2025-01-13') {
+          pay = Math.round(pay*1.02)
+        }
+        if (dates[i] > '2025-07-13') {
+          pay = Math.round(pay*1.02)
+        }
+        if (dates[i] > '2026-01-13') {
+          pay = Math.round(pay*1.02)
+        }
+      }
+
       var trace1 = {
         x: dates,
         y: usyd_payments_feb,
@@ -350,24 +376,49 @@
         x: dates,
         y: wsu_payments,
         name: 'WSU Agreement',
-        mode: 'bar'
+        mode: 'lines',
+        line: {
+          dash: 'solid',
+          color: '#17becf'
+        }
       };
 
       var trace6 = {
         x: dates,
         y: utas_payments,
         name: 'UTas Agreement',
-        mode: 'bar'
+        mode: 'lines',
+        line: {
+          dash: 'solid',
+          color: '#8c564b'
+        }
       };
 
       var trace7 = {
         x: dates,
         y: acu_payments,
         name: 'ACU Agreement',
-        mode: 'bar'
+        mode: 'lines',
+        line: {
+          dash: 'solid',
+          color: '#d62728'
+        }
+
       };
 
-      var data = [trace1, trace2, trace3, trace4, trace5, trace6, trace7];
+      var trace8 = {
+        x: dates,
+        y: acu_payments,
+        name: 'UQ Offer',
+        mode: 'lines',
+        line: {
+          dash: 'solid',
+          color: '#9467bd'
+        }
+
+      };
+
+      var data = [trace1, trace2, trace3, trace4, trace5, trace6, trace7, trace8];
 
       var layout = {
         xaxis:{
