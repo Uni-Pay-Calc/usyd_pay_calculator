@@ -420,7 +420,7 @@
 
       };
 
-      var data = [trace1, trace2, trace3, trace4, trace5, trace6, trace7, trace8];
+      var data = [trace1, trace2, trace4, trace5, trace6, trace7, trace8];
 
       var layout = {
         xaxis:{
@@ -549,6 +549,9 @@
         y: wsu_yearly,
         name: 'WSU Agreement',
         type: 'bar'
+        marker: {
+          color: '#17becf',
+        }
       };
 
       var traceE = {
@@ -556,6 +559,9 @@
         y: utas_yearly,
         name: 'UTas Agreement',
         type: 'bar'
+        marker: {
+          color: '#2ca02c',
+        }
       };
 
       var traceF = {
@@ -563,9 +569,22 @@
         y: acu_yearly,
         name: 'ACU Agreement',
         type: 'bar'
+        marker: {
+          color: '#d62728',
+        }
       };
 
-      var data2 = [traceA, traceB, traceC, traceD, traceE, traceF];
+      var traceG = {
+        x: finyear,
+        y: uq_yearly,
+        name: 'UQ Offer',
+        type: 'bar'
+        marker: {
+          color: '#9467bd',
+        }
+      };      
+
+      var data2 = [traceA, traceB, traceC, traceD, traceE, traceF, traceG];
 
       var layout2 = {
         xaxis:{
